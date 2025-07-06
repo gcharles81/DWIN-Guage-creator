@@ -575,7 +575,7 @@ with st.sidebar:
         'linear_orientation': "horizontal",
         'linear_num_segments': 50,
         'linear_segment_gap_pixels': 2,
-        'tip_style': "Rounded",
+        'tip_style': "Rounded",  # Tip style default
         'show_angle_markers': True,
         'show_value': True,
         'show_name': False,
@@ -591,8 +591,7 @@ with st.sidebar:
     # Live preview value slider (always visible)
     st.session_state['gauge_value'] = st.slider(
         "Gauge Value (for live preview)", 0, 99,
-        value=st.session_state['gauge_value'], key="gauge_value_slider",
-        help="Adjust the value shown in the live preview"
+        value=st.session_state['gauge_value'], key="gauge_value_slider"
     )
 
     # Gauge type selector
@@ -601,23 +600,17 @@ with st.sidebar:
         ("Round", "Round Segmented", "Linear", "Linear Segmented"),
         index=["Round", "Round Segmented", "Linear", "Linear Segmented"].index(
             st.session_state['gauge_type']
-        ),
-        key="gauge_type_radio",
-        help="Choose gauge style. Linear types disable name/value toggles."
+        ), key="gauge_type_radio"
     )
 
     # Size inputs
     st.session_state['output_width'] = st.number_input(
         "Output Width (px)", 100, 1000,
-        value=st.session_state['output_width'], step=10,
-        key="width_input",
-        help="Width of the exported gauge image"
+        value=st.session_state['output_width'], step=10, key="width_input"
     )
     st.session_state['output_height'] = st.number_input(
         "Output Height (px)", 100, 1000,
-        value=st.session_state['output_height'], step=10,
-        key="height_input",
-        help="Height of the exported gauge image"
+        value=st.session_state['output_height'], step=10, key="height_input"
     )
 
     # Colors and 3D effect toggle
@@ -631,8 +624,7 @@ with st.sidebar:
         "Background Color", st.session_state['bg_color'], key="bg_color_picker"
     )
     st.session_state['is_3d'] = st.checkbox(
-        "Enable 3D Effect", value=st.session_state['is_3d'], key="is_3d_checkbox",
-        help="Apply a subtle 3D lighting effect to the gauge"
+        "Enable 3D Effect", value=st.session_state['is_3d'], key="is_3d_checkbox"
     )
 
     # Specific gauge settings
@@ -640,8 +632,7 @@ with st.sidebar:
         st.session_state['gauge_thickness'] = st.slider(
             "Gauge Thickness (Relative)", 0.05, 0.3,
             value=st.session_state['gauge_thickness'], step=0.01,
-            key="thickness_slider",
-            help="Relative thickness of the round gauge arc"
+            key="thickness_slider"
         )
         st.session_state['start_angle'] = st.number_input(
             "Start Angle (degrees)", 0, 360,
@@ -657,13 +648,18 @@ with st.sidebar:
             "Fill Direction", ("clockwise", "counter-clockwise"),
             index=["clockwise", "counter-clockwise"].index(
                 st.session_state['fill_direction']
-            ),
-            key="fill_direction_radio"
+            ), key="fill_direction_radio"
         )
         st.session_state['show_angle_markers'] = st.checkbox(
             "Show Debug Angle Markers (0, 90, 180, 270)",
-            value=st.session_state['show_angle_markers'],
-            key="show_angle_markers_checkbox"
+            value=st.session_state['show_angle_markers'], key="show_angle_markers_checkbox"
+        )
+        # Tip style selector (round vs straight ends)
+        st.session_state['tip_style'] = st.radio(
+            "Gauge Tip Style", ("Rounded", "Straight"),
+            index=["Rounded", "Straight"].index(
+                st.session_state['tip_style']
+            ), key="tip_style_radio"
         )
         if st.session_state['gauge_type'] == "Round Segmented":
             st.session_state['num_segments'] = st.number_input(
@@ -689,8 +685,14 @@ with st.sidebar:
             "Linear Gauge Orientation", ("horizontal", "vertical"),
             index=["horizontal", "vertical"].index(
                 st.session_state['linear_orientation']
-            ),
-            key="linear_orientation_radio"
+            ), key="linear_orientation_radio"
+        )
+        # Tip style selector for linear gauges
+        st.session_state['tip_style'] = st.radio(
+            "Gauge Tip Style", ("Rounded", "Straight"),
+            index=["Rounded", "Straight"].index(
+                st.session_state['tip_style']
+            ), key="tip_style_radio"
         )
         if st.session_state['gauge_type'] == "Linear Segmented":
             st.session_state['linear_num_segments'] = st.number_input(
@@ -715,8 +717,7 @@ with st.sidebar:
         "Show Gauge Value on Chart",
         value=False if is_linear else st.session_state.get('show_value', True),
         disabled=is_linear,
-        key="show_value_checkbox",
-        help="Toggle display of the numeric value overlay"
+        key="show_value_checkbox"
     )
     st.session_state['show_value'] = False if is_linear else sv
     if st.session_state['show_value']:
@@ -730,8 +731,7 @@ with st.sidebar:
         "Show Gauge Name on Chart",
         value=False if is_linear else st.session_state.get('show_name', False),
         disabled=is_linear,
-        key="show_name_checkbox",
-        help="Toggle display of the text label overlay"
+        key="show_name_checkbox"
     )
     st.session_state['show_name'] = False if is_linear else sn
     if st.session_state['show_name']:
