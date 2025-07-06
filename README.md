@@ -21,7 +21,7 @@ Installation
 bash
 Copy
 Edit
-git clone https://github.com/yourusername/gauge-icl-tool.git
+git clone https://github.com/gcharles81/DWIN-Guage-creator.git
 cd gauge-icl-tool
 pip install -r requirements.txt
 streamlit run app.py
