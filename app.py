@@ -576,8 +576,8 @@ with st.sidebar:
         'linear_num_segments': 50,
         'linear_segment_gap_pixels': 2,
         'tip_style': "Rounded",  # Tip style default
-        'show_angle_markers': True,
-        'show_value': True,
+        'show_angle_markers': False,
+        'show_value': False,
         'show_name': False,
         'gauge_name': "",
         'is_3d': True,
