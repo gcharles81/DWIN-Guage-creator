@@ -22,7 +22,7 @@ bash
 Copy
 Edit
 git clone https://github.com/gcharles81/DWIN-Guage-creator.git
-cd gauge-icl-tool
+cd DWIN-Guage-creator
 pip install -r requirements.txt
 streamlit run app.py
 Usage
