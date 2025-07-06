@@ -561,13 +561,13 @@ with st.sidebar:
         'gauge_type': "Round",
         'output_width': 200,
         'output_height': 200,
-        'gauge_value': 0,
+        'gauge_value': 50,
         'active_color': "#1f77b4",
-        'inactive_color': "#ff0000",
+        'inactive_color': "#4b4646",
         'bg_color': "#000000",
-        'gauge_thickness': 0.15,
-        'start_angle': 175,
-        'end_angle': 175,
+        'gauge_thickness': 0.25,
+        'start_angle': 200,
+        'end_angle': 90,
         'fill_direction': "counter-clockwise",
         'num_segments': 50,
         'segment_gap_deg': 2.0,
@@ -581,7 +581,7 @@ with st.sidebar:
         'show_name': False,
         'gauge_name': "",
         'is_3d': True,
-        'gauge_value_color': "#FFFFFF",
+        'gauge_value_color': "#4630C4",
         'gauge_name_color': "#FFFFFF"
     }
     for key, val in defaults.items():
